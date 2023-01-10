@@ -1,26 +1,42 @@
-#include <iostream>
-#include <vector>
+#include <string>
+#include <set>
+#include <cmath>
 using namespace std;
 
-vector<bool> prime(1000001, true);
+set<int> numSet;
 
-int solution(int n) {
+bool isPrime(int n)
+{
+	if (n == 0 || n == 1)
+		return false;
+		
+	int squareRoot = sqrt(n);
+	
+	for (int i = 2; i <= squareRoot; ++i)
+		if (n%i == 0)
+			return false;
+	
+	return true;
+}
+
+void makeCombination(string comb, string others)
+{
+	if (comb != "")
+		numSet.insert(stoi(comb));
+	
+	for (int i = 0; i < others.size(); ++i)
+		makeCombination(comb + others[i], others.substr(0, i) + others.substr(i + 1));
+}
+
+int solution(string numbers)
+{
+	makeCombination("", numbers);
+	
     int answer = 0;
     
-    prime[1] = false;
-    for(int i = 2; i <= n; i++)
-    	for(int j = 2; i*j <= n; j++)
-    		prime[i*j] = false;
-    
-    for(int i = 1; i <= n; i++)
-    	if(prime[i])
+    for (int n : numSet)
+    	if (isPrime(n))
     		answer++;
     
     return answer;
-}
-
-int main()
-{
-	cout << solution(5);
-	return 0;
 }

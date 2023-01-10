@@ -11,7 +11,7 @@ string solution(string s) {
 
     while(ss >> word)
     {
-//    	cout << word << ", size: " << word.size() << endl;
+    	
         for(int i = 0; i < word.size(); i++)
         {
             if(i & 1)
@@ -20,17 +20,18 @@ string solution(string s) {
                 word[i] = toupper(word[i]);
         }
         
-        cout << word << endl;
+        cout << word << ", size: " << word.size() << endl;
 
         answer += (word + ' ');
     }
-
+    
     answer.pop_back(); // 마지막 공백 제거 
+    cout << answer << ", size: " << answer.size() << endl;
 
     return answer;
 }
 
 int main() {
-	solution("try     hello world ");
+	solution("  TRY     hello   world     ");
 	return 0;
 }
